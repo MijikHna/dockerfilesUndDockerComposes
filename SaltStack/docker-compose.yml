@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  salt-master:
+    build:
+      context: ./master/
+    image: salt_lernen/salt-master
+    hostname: salt-master
+    container_name: salt-master
+    restart: on-failure
+    ports:
+      - 4505:4505
+      - 4506:4506
+      - 8000:8000
+    networks:
+      salt-network:
+        ipv4_address: 10.100.100.10
+    volumes:
+      - ./master/salt/:/etc/salt/
+
+  salt-minion:
+    build:
+      context: ./minion/
+    image: salt_lernen/salt-minion
+    hostname: salt-minion
+    container_name: salt-minion
+    restart: on-failure
+    depends_on:
+      - salt-master
+    networks:
+      salt-network:
+        ipv4_address: 10.100.100.20
+    volumes:
+      - ./minion/salt/:/etc/salt/
+
+networks:
+  salt-network:
+    name: salt-network
+    ipam:
+      driver: default
+      config:
+        - subnet: '10.100.100.0/24'

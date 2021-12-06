@@ -1,0 +1,44 @@
+### Test 000
+curl -X GET http://10.100.100.10:8000/login
+
+### Test 000.1
+curl -X GET http://localhost:8000/login
+
+### Test 000.2
+GET http://localhost:8000 HTTP/1.1
+
+### Test 001
+curl -X POST http://10.100.100.10:8000/login \
+-b 'session_id=7e245419f9c978c5b41bc8a177202c4323511833' \
+-H 'Accept: application/json' \
+-H 'Content-Content-Type: application/json' \
+-d '{
+  "username": "testuser",
+  "password": "testPassword",
+  "eauth": "auto"
+}'
+
+### Test 001.1
+curl -X POST http://10.100.100.10:8000/login \
+-H 'Accept: application/x-yaml' \
+-d username=testuser \
+-d password=testPassword \
+-d eauth=auto
+
+### Test 002
+POST http://10.100.100.10:8000/login HTTP/1.1
+# Accept: application/json
+Accept: application/x-yaml
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testPassword",
+  "eauth": "auto"
+}
+
+### Test 002
+
+
+### 
+curl https://google.de

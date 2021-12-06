@@ -1,0 +1,6 @@
+external_auth:
+  pam:
+    test_user:
+      - .*
+      - '@wheel'
+      - '@runner'

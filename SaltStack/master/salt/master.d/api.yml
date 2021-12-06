@@ -1,0 +1,11 @@
+external_auth:
+  auto:
+    test_user:
+      - .*
+      - '@local'
+      - '@wheel'
+      - '@runner'
+      - '@jobs'
+      - 'salt-minion':
+          - test.*
+          - version.*
